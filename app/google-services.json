@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "312682845884",
+    "firebase_url": "https://farmacopreguntas.firebaseio.com",
+    "project_id": "farmacopreguntas",
+    "storage_bucket": "farmacopreguntas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:312682845884:android:532ffe605dac7f86",
+        "android_client_info": {
+          "package_name": "com.example.gibran.preguntas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "312682845884-vs87rg818eni4tvv8799jhr2uh446ajp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gibran.preguntas",
+            "certificate_hash": "0fa15df8ee49fcbd87fa59e46d165776cf5a182c"
+          }
+        },
+        {
+          "client_id": "312682845884-m5mrfr2bip5sph89r021mi7eh8o6bhuv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzxNJzLNqFzE9_OgFnzNMbzxOBhPLki7g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "312682845884-m5mrfr2bip5sph89r021mi7eh8o6bhuv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
