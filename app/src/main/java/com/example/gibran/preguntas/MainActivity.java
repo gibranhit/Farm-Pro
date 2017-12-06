@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.gibran.preguntas.modelo.Usuario;
+import com.example.gibran.preguntas.variables.Variables;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -74,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
             if (login.getContraseña().equals(pwd)){
 
               Intent homeActivity = new Intent(MainActivity.this,Home.class);
+              Variables.currentUser = login;
               startActivity(homeActivity);
               finish();
 

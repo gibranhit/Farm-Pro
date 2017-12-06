@@ -1,6 +1,7 @@
 package com.example.gibran.preguntas;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.example.gibran.preguntas.Interface.ItemClickListener;
 import com.example.gibran.preguntas.ViewHolder.CategoryViewHolder;
 import com.example.gibran.preguntas.modelo.Category;
+import com.example.gibran.preguntas.variables.Variables;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -82,8 +84,12 @@ public class CategoryFragment extends Fragment {
         viewHolder.setItemClickListener(new ItemClickListener() {
           @Override
           public void onClick(View view, int position, boolean isLongClick) {
-            Toast.makeText(getActivity(), String.format("%s|%s",adapter.getRef(position).getKey(),model.getName()), Toast.LENGTH_SHORT).show();
-          }
+            //Toast.makeText(getActivity(), String.format("%s|%s",adapter.getRef(position).getKey(),model.getName()), Toast.LENGTH_SHORT).show();
+            Intent starGame = new Intent(getActivity(),Start.class);
+            Variables.categoryId = adapter.getRef(position).getKey();
+            startActivity(starGame);
+
+           }
         });
       }
     };
