@@ -18,11 +18,17 @@ import android.widget.Toast;
 import com.example.gibran.preguntas.Interface.ItemClickListener;
 import com.example.gibran.preguntas.ViewHolder.CategoryViewHolder;
 import com.example.gibran.preguntas.modelo.Category;
+import com.example.gibran.preguntas.modelo.Questions;
 import com.example.gibran.preguntas.variables.Variables;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+
+import java.util.Collections;
 
 
 public class CategoryFragment extends Fragment {
@@ -33,8 +39,9 @@ public class CategoryFragment extends Fragment {
   RecyclerView.LayoutManager layoutManager;
   FirebaseRecyclerAdapter<Category,CategoryViewHolder> adapter;
 
-  FirebaseDatabase database;
-  DatabaseReference categories;
+  FirebaseDatabase database,data;
+  DatabaseReference categories,questions;
+
 
   public static CategoryFragment newInstance(){
     CategoryFragment categoryFragment = new CategoryFragment();
@@ -47,7 +54,6 @@ public class CategoryFragment extends Fragment {
 
     database = FirebaseDatabase.getInstance();
     categories = database.getReference("Category");
-
 
   }
 
@@ -87,6 +93,7 @@ public class CategoryFragment extends Fragment {
             //Toast.makeText(getActivity(), String.format("%s|%s",adapter.getRef(position).getKey(),model.getName()), Toast.LENGTH_SHORT).show();
             Intent starGame = new Intent(getActivity(),Start.class);
             Variables.categoryId = adapter.getRef(position).getKey();
+            Variables.categoryName = model.getName();
             startActivity(starGame);
 
            }

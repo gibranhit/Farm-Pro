@@ -15,6 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Collections;
+import java.util.Random;
 
 public class Start extends AppCompatActivity {
 
@@ -48,25 +49,24 @@ public class Start extends AppCompatActivity {
 
     //primero, limpia la lista si hay una vieja pregunta
     if (Variables.questionsList.size()>0)
-         Variables.questionsList.clear();
+      Variables.questionsList.clear();
 
-    questions.orderByChild("CategoryId").equalTo(categoryId)
-      .addValueEventListener(new ValueEventListener() {
-        @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
-          for (DataSnapshot postSnapshot: dataSnapshot.getChildren())
-          {
-            Questions ques = postSnapshot.getValue(Questions.class);
-            Variables.questionsList.add(ques);
+      questions.orderByChild("CategoryId").equalTo(categoryId)
+        .addValueEventListener(new ValueEventListener() {
+          @Override
+          public void onDataChange(DataSnapshot dataSnapshot) {
+            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+              Questions ques = postSnapshot.getValue(Questions.class);
+              Variables.questionsList.add(ques);
+              Collections.shuffle(Variables.questionsList);
+            }
           }
-        }
 
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
+          @Override
+          public void onCancelled(DatabaseError databaseError) {
 
-        }
-      });
-    //lista random
-    Collections.shuffle(Variables.questionsList);
-  }
+          }
+        });
+
+    }
 }

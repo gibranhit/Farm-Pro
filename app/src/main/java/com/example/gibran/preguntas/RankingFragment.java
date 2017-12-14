@@ -1,5 +1,6 @@
 package com.example.gibran.preguntas;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -80,7 +81,7 @@ public class RankingFragment extends Fragment {
       Ranking.class,R.layout.layout_ranking,RankingViewHolder.class,rankingTbl.orderByChild("score")
     ) {
       @Override
-      protected void populateViewHolder(RankingViewHolder viewHolder, Ranking model, int position) {
+      protected void populateViewHolder(RankingViewHolder viewHolder, final Ranking model, int position) {
 
         viewHolder.txt_nombre.setText(model.getUserName());
         viewHolder.txt_puntaje.setText(String.valueOf(model.getScore()));
@@ -88,6 +89,10 @@ public class RankingFragment extends Fragment {
         viewHolder.setItemClickListener(new ItemClickListener() {
           @Override
           public void onClick(View view, int position, boolean isLongClick) {
+
+            Intent scoreDetail = new Intent(getActivity(),ScoreDetalles.class);
+            scoreDetail.putExtra("viewUser",model.getUserName());
+            startActivity(scoreDetail);
 
           }
         });

@@ -6,12 +6,12 @@
     android:enabled="true"
     android:title="Categorias"
     app:showAsAction="ifRoom"
-    android:icon="@drawable/ic_question_answer_black_24dp"/>
+    android:icon="@drawable/pastilla"/>
 
   <item android:id="@+id/action_ranking"
     android:enabled="true"
     android:title="Ranking"
     app:showAsAction="ifRoom"
-    android:icon="@drawable/ic_star_black_24dp"/>
+    android:icon="@drawable/doctor"/>
 
 </menu>

@@ -65,7 +65,11 @@ public class Done extends AppCompatActivity {
       questions_score.child(String.format("%s_%s", Variables.currentUser.getNombre(),Variables.categoryId))
                                            .setValue(new QuestionScore(String.format("%s_%s",
                                              Variables.currentUser.getNombre(),
-                                             Variables.categoryId),Variables.currentUser.getNombre(),String.valueOf(score)));
+                                             Variables.categoryId),
+                                             Variables.currentUser.getNombre(),
+                                             String.valueOf(score),
+                                             Variables.categoryId,
+                                             Variables.categoryName));
     }
   }
 }

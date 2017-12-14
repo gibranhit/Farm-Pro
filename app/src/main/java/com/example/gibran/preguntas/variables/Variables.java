@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Variables {
 
-  public static String categoryId;
+  public static String categoryId, categoryName;
   public static Usuario currentUser;
   public  static List<Questions> questionsList = new ArrayList<>();
 }

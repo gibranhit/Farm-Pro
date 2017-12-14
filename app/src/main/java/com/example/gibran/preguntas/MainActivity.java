@@ -22,7 +22,7 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 public class MainActivity extends AppCompatActivity {
 
-  MaterialEditText edtNuevoUser,edtNuevaContraseña,edtNuevoEmail;//para registrarte
+  MaterialEditText edtNuevoUser,edtMatricula,edtNuevaContraseña,edtNuevoEmail;//para registrarte
   MaterialEditText edtUser,edtPassword;//para ingresar
 
   Button btnSignUp,btnSingIn;
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
   private void showSignUpDialog() {
 
     AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
-    alertDialog.setTitle("Sign Up");
+    alertDialog.setTitle("Registrarse");
     alertDialog.setMessage("Por favor ingresa la informacion completa");
 
     LayoutInflater inflater = this.getLayoutInflater();
@@ -112,7 +112,9 @@ public class MainActivity extends AppCompatActivity {
 
     edtNuevoUser = (MaterialEditText) sign_up_layout.findViewById(R.id.Usuario);
     edtNuevaContraseña = (MaterialEditText) sign_up_layout.findViewById(R.id.Password);
+    edtMatricula = (MaterialEditText) sign_up_layout.findViewById(R.id.Matricula);
     edtNuevoEmail = (MaterialEditText) sign_up_layout.findViewById(R.id.Email);
+
 
     alertDialog.setView(sign_up_layout);
     alertDialog.setIcon(R.drawable.ic_account_circle_black_24dp);
@@ -124,12 +126,12 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
-    alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+    alertDialog.setPositiveButton("SI", new DialogInterface.OnClickListener() {
       @Override
       public void onClick(DialogInterface dialog, int which) {
 
         final Usuario usuario = new Usuario(edtNuevoUser.getText().toString(),
-          edtNuevaContraseña.getText().toString(),
+          edtNuevaContraseña.getText().toString(),edtMatricula.getText().toString() ,
           edtNuevoEmail.getText().toString());
 
         usuarios.addListenerForSingleValueEvent(new ValueEventListener() {

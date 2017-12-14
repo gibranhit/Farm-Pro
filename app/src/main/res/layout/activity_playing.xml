@@ -4,27 +4,38 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@drawable/bg_vertical"
+  android:background="@drawable/logofarm2"
   tools:context="com.example.gibran.preguntas.Playing">
+
+
+
+  <Button
+    android:id="@+id/cerrar"
+    android:layout_width="35dp"
+    android:layout_height="35dp"
+    android:theme="@style/MyButton"
+    android:background="@drawable/cancel"
+    android:foreground="?android:attr/selectableItemBackground"
+    />
 
   <ImageView
     android:id="@+id/question_image"
-    android:layout_alignParentTop="true"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="25dp"
+    android:layout_marginTop="23dp"
     android:gravity="center"
     android:layout_width="300dp"
-    android:layout_height="200dp" />
+    android:layout_height="200dp"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true" />
 
   <TextView
     android:id="@+id/question_text"
     android:textColor="@android:color/white"
     android:textStyle="bold"
-    android:textSize="20dp"
+    android:textSize="15dp"
     android:visibility="invisible"
     android:layout_alignParentTop="true"
     android:layout_centerHorizontal="true"
-    android:layout_marginTop="25dp"
+    android:layout_marginTop="50dp"
     android:gravity="center"
     android:layout_width="350dp"
     android:layout_height="wrap_content" />
@@ -53,33 +64,35 @@
      android:layout_height="wrap_content">
 
      <TextView
-       android:textColor="@android:color/white"
+       android:id="@+id/txtScore"
+       android:layout_width="0dp"
+       android:layout_height="wrap_content"
+       android:layout_weight="1"
        android:gravity="center_horizontal"
        android:text="0"
-       android:textSize="36dp"
-       android:id="@+id/txtScore"
-       android:layout_weight="1"
-       android:layout_width="0dp"
-       android:layout_height="wrap_content" />
+       android:textColor="@android:color/white"
+       android:textSize="30dp" />
+
      <TextView
        android:textColor="@android:color/white"
        android:gravity="center_horizontal"
        android:text="1/30"
-       android:textSize="36dp"
+       android:textSize="30dp"
        android:id="@+id/txtTotalQuestion"
        android:layout_weight="1"
        android:layout_width="0dp"
        android:layout_height="wrap_content" />
 
    </LinearLayout>
+
    <ProgressBar
      android:id="@+id/progressBar"
      style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
      android:layout_marginLeft="8dp"
      android:layout_marginRight="8dp"
-     android:max="8"
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content" />
+     android:max="30" />
 
    <Button
      android:id="@+id/btnAnswerA"
@@ -130,7 +143,12 @@
      android:layout_width="match_parent"
      android:layout_height="wrap_content" />
 
+
+
+
+
  </LinearLayout>
+
 
   </RelativeLayout>
 

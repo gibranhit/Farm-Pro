@@ -2,8 +2,10 @@ package com.example.gibran.preguntas;
 
 import android.content.Intent;
 import android.os.CountDownTimer;
+import android.support.design.internal.NavigationMenu;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,11 +18,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
+import io.github.yavski.fabspeeddial.FabSpeedDial;
+
 public class Playing extends AppCompatActivity implements View.OnClickListener{
 
 
   final  static  long INTERVAL = 1000;// 1 segundo
-  final  static  long TIMEOUT = 7000; // 7 SEGUNDOS
+  final  static  long TIMEOUT = 31000; // 30 SEGUNDOS
   int progressValue = 0;
 
   CountDownTimer mCountDown;
@@ -40,7 +44,21 @@ public class Playing extends AppCompatActivity implements View.OnClickListener{
     setContentView(R.layout.activity_playing);
 
 
+   Button btncerrar = (Button)findViewById(R.id.cerrar);
+     btncerrar.setOnClickListener(new View.OnClickListener() {
+       @Override
+       public void onClick(View v) {
+          Intent intent = new Intent(Playing.this,Done.class);
+          Bundle dataSend = new Bundle();
+          dataSend.putInt("SCORE",score);
+          dataSend.putInt("TOTAL",totalQuestions);
+          dataSend.putInt("CORRECTAS",correctAnswer);
+          intent.putExtras(dataSend);
+          startActivity(intent);
+          finish();
 
+       }
+     });
     //Vistas
     txtScore =(TextView)findViewById(R.id.txtScore);
     txtQuestionNum = (TextView)findViewById(R.id.txtTotalQuestion);
@@ -61,6 +79,8 @@ public class Playing extends AppCompatActivity implements View.OnClickListener{
 
 
   }
+
+
 
   @Override
   public void onClick(View view) {

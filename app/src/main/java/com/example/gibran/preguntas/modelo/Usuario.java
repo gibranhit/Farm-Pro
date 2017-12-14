@@ -8,6 +8,7 @@ public class Usuario {
 
   private String nombre;
   private String contraseña;
+  private String matricula;
   private String email;
 
   public Usuario(){
@@ -38,9 +39,18 @@ public class Usuario {
     this.email = email;
   }
 
-  public Usuario(String nombre, String contraseña, String email) {
+  public String getMatricula() {
+    return matricula;
+  }
+
+  public void setMatricula(String matricula) {
+    this.matricula = matricula;
+  }
+
+  public Usuario(String nombre, String contraseña,String matricula, String email) {
     this.nombre = nombre;
     this.contraseña = contraseña;
+    this.matricula = matricula;
     this.email = email;
   }
 }
