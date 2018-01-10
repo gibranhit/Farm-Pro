@@ -1,14 +1,62 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   tools:context="com.example.gibran.preguntas.CategoryFragment">
 
-  <android.support.v7.widget.RecyclerView
-    android:id="@+id/listCategory"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-  </android.support.v7.widget.RecyclerView>
+
+    <android.support.v7.widget.RecyclerView
+      android:id="@+id/listCategory"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <android.support.design.widget.CoordinatorLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="175dp"
+        android:layout_marginRight="15dp"
+        android:src="@drawable/ic_action_name"
+        android:id="@+id/fab_info"
+        android:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        app:backgroundTint="@color/fab1_color"
+        android:visibility="invisible"
+        />
+
+      <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="100dp"
+        android:layout_marginRight="15dp"
+        android:src="@drawable/ic_action_logout"
+        android:id="@+id/fab_logout"
+        android:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        app:backgroundTint="@color/fab2_color"
+        android:visibility="invisible"
+        />
+
+      <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="15dp"
+        android:src="@drawable/doctor"
+        android:id="@+id/fab"
+        android:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        />
+    </android.support.design.widget.CoordinatorLayout>
 
 </FrameLayout>

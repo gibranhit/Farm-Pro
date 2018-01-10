@@ -16,27 +16,76 @@
     android:layout_alignParentTop="true"
     android:layout_marginTop="50dp"/>
 
-  <android.support.v7.widget.CardView
-    app:cardElevation="4dp"
+  <TextView
+    android:layout_centerHorizontal="true"
+    android:layout_below="@+id/logo"
+    android:id="@+id/preguntas"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="N° de preguntas:"
+    android:textSize="22dp"
+    android:textStyle="bold" />
 
-    android:layout_margin="16dp"
-    android:layout_centerInParent="true"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+  <Button
+    android:layout_centerHorizontal="true"
+    android:layout_below="@+id/preguntas"
+    android:elevation="4dp"
+    android:id="@+id/btn30"
+    android:text="30 preguntas"
+    android:textStyle="bold"
+    android:theme="@style/MyButton"
+    android:textColor="@android:color/white"
+    android:background="#AD1457"
+    android:layout_margin="8dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    style="@style/Base.Widget.AppCompat.Button.Borderless"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content" />
 
-    <Button
+  <Button
+    android:layout_centerHorizontal="true"
+    style="@style/Widget.AppCompat.Button.Borderless"
+    android:id="@+id/btnseis"
+    android:background="#AD1457"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:text="60 Preguntas"
+    android:textColor="@android:color/white"
+    android:textStyle="bold"
+    android:theme="@style/MyButton"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:layout_below="@+id/btn30" />
+  <Button
+    android:layout_centerHorizontal="true"
+    style="@style/Widget.AppCompat.Button.Borderless"
+    android:id="@+id/btnnueve"
+    android:background="#AD1457"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:text="90 Preguntas"
+    android:textColor="@android:color/white"
+    android:textStyle="bold"
+    android:theme="@style/MyButton"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:layout_below="@+id/btnseis" />
+
+
+  <Button
+      android:layout_centerHorizontal="true"
+      android:layout_below="@+id/btnnueve"
       style="@style/Widget.AppCompat.Button.Borderless"
-      android:id="@+id/btnPlay"
+      android:id="@+id/btnTodasPreguntas"
       android:layout_margin="8dp"
       android:background="#AD1457"
       android:foreground="?android:attr/selectableItemBackground"
-      android:text="Jugar"
+      android:text="Todas las preguntas"
       android:textColor="@android:color/white"
       android:textStyle="bold"
       android:theme="@style/MyButton"
-      android:layout_width="match_parent"
+      android:layout_width="200dp"
       android:layout_height="wrap_content" />
 
-  </android.support.v7.widget.CardView>
 
 </RelativeLayout>

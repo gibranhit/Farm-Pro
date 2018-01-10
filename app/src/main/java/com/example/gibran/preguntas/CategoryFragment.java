@@ -6,12 +6,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.design.internal.NavigationMenu;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ResourceCursorAdapter;
 import android.widget.Toast;
 
@@ -21,6 +26,7 @@ import com.example.gibran.preguntas.modelo.Category;
 import com.example.gibran.preguntas.modelo.Questions;
 import com.example.gibran.preguntas.variables.Variables;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,6 +35,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.Collections;
+
+import io.github.yavski.fabspeeddial.FabSpeedDial;
 
 
 public class CategoryFragment extends Fragment {
@@ -39,8 +47,14 @@ public class CategoryFragment extends Fragment {
   RecyclerView.LayoutManager layoutManager;
   FirebaseRecyclerAdapter<Category,CategoryViewHolder> adapter;
 
-  FirebaseDatabase database,data;
-  DatabaseReference categories,questions;
+  FirebaseDatabase database;
+  DatabaseReference categories;
+  FirebaseAuth auth;
+
+  FloatingActionButton button,btnInfo,btnLogout;
+  Animation fabOpen,fabClose,fabClock,fabAntiClock;
+  boolean isOpen = false;
+
 
 
   public static CategoryFragment newInstance(){
@@ -52,8 +66,13 @@ public class CategoryFragment extends Fragment {
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
+
     database = FirebaseDatabase.getInstance();
     categories = database.getReference("Category");
+
+    auth = FirebaseAuth.getInstance();
+
+
 
   }
 
@@ -68,10 +87,56 @@ public class CategoryFragment extends Fragment {
     layoutManager = new LinearLayoutManager(container.getContext());
     listCategory.setLayoutManager(layoutManager);
 
+    button = (FloatingActionButton)myFragment.findViewById(R.id.fab);
+    btnInfo = (FloatingActionButton)myFragment.findViewById(R.id.fab_info);
+    btnLogout = (FloatingActionButton)myFragment.findViewById(R.id.fab_logout);
+    fabOpen = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.fab_open);
+    fabClose = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.fab_close);
+    fabClock= AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.rotate_clockwise);
+    fabAntiClock = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.rotate_anticlock);
+
+    btnLogout.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        LogoutUser();
+      }
+    });
+
+    button.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        if(isOpen){
+
+          btnLogout.startAnimation(fabClose);
+          btnInfo.startAnimation(fabClose);
+          button.startAnimation(fabAntiClock);
+          btnLogout.setClickable(false);
+          btnInfo.setClickable(false);
+          isOpen = false;
+
+        }else {
+          btnLogout.startAnimation(fabOpen);
+          btnInfo.startAnimation(fabOpen);
+          button.startAnimation(fabClock);
+          btnLogout.setClickable(true);
+          btnInfo.setClickable(true);
+          isOpen = true;
+        }
+      }
+    });
+
     loadCategories();
 
     return myFragment;
   }
+
+  private void LogoutUser() {
+    auth.signOut();
+    if (auth.getCurrentUser() ==  null){
+      startActivity( new Intent(getActivity(),MainActivity.class));
+    }
+  }
+
 
   private void loadCategories() {
 

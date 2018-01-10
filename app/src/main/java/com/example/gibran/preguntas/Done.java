@@ -19,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Done extends AppCompatActivity {
 
   Button btnTryAgain;
-  TextView txtResultScore,getTxtResultQuestions;
+  TextView txtResultScore,getTxtResultQuestions,getTxtIcorrectQuestions;
   ProgressBar progressBar;
 
   FirebaseDatabase database;
@@ -34,6 +34,7 @@ public class Done extends AppCompatActivity {
     questions_score = database.getReference("Questions_Score");
 
     txtResultScore = (TextView)findViewById(R.id.txtTotalScore);
+    getTxtIcorrectQuestions = (TextView)findViewById(R.id.txtTotalQuestionIncorrect);
     getTxtResultQuestions = (TextView)findViewById(R.id.txtTotalQuestion);
     progressBar = (ProgressBar)findViewById(R.id.doneProgressBar);
     btnTryAgain = (Button)findViewById(R.id.btnTryAgain);
@@ -54,9 +55,11 @@ public class Done extends AppCompatActivity {
       int score = extra.getInt("SCORE");
       int totalQuestions = extra.getInt("TOTAL");
       int correctAnswer = extra.getInt("CORRECTAS");
+      int incorrectAnswer = extra.getInt("INCORRECTAS");
 
       txtResultScore.setText(String.format("PUNTAJE : %d",score));
       getTxtResultQuestions.setText(String.format("CORRECTAS : %d / %d",correctAnswer,totalQuestions));
+      getTxtIcorrectQuestions.setText(String.format("INCORRECTAS : %d",incorrectAnswer));
 
       progressBar.setMax(totalQuestions);
       progressBar.setProgress(correctAnswer);

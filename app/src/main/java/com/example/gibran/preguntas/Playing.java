@@ -1,6 +1,7 @@
 package com.example.gibran.preguntas;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.support.design.internal.NavigationMenu;
 import android.support.v7.app.AppCompatActivity;
@@ -29,7 +30,7 @@ public class Playing extends AppCompatActivity implements View.OnClickListener{
 
   CountDownTimer mCountDown;
 
-  int index=0,score=0,thisQuestions=0,totalQuestions,correctAnswer;
+  int index=0,score=0,thisQuestions=0,totalQuestions,correctAnswer,incorrectAnswer;
 
 
 
@@ -53,6 +54,7 @@ public class Playing extends AppCompatActivity implements View.OnClickListener{
           dataSend.putInt("SCORE",score);
           dataSend.putInt("TOTAL",totalQuestions);
           dataSend.putInt("CORRECTAS",correctAnswer);
+          dataSend.putInt("INCORRECTAS",incorrectAnswer);
           intent.putExtras(dataSend);
           startActivity(intent);
           finish();
@@ -89,19 +91,55 @@ public class Playing extends AppCompatActivity implements View.OnClickListener{
     if (index < totalQuestions)
     { // si todavia tiene preguntas en la lista
 
-      Button  clickedButton = (Button)view;
+      final Button  clickedButton = (Button)view;
       if (clickedButton.getText().equals(Variables.questionsList.get(index).getCorrectAnswer()))
       {
         //Si eliges la respuesta correcta
         score +=10;
         correctAnswer++;
-        mostrarPregunta(++index);
+        Toast.makeText(this, "Respuesta correcta", Toast.LENGTH_SHORT).show();
+        clickedButton.setBackgroundColor(Color.parseColor("#32cb00"));
+
+        new CountDownTimer(2500, 50) {
+
+          @Override
+          public void onTick(long arg0) {
+            // TODO Auto-generated method stub
+
+          }
+
+          @Override
+          public void onFinish() {
+
+            mostrarPregunta(++index);
+            clickedButton.setBackgroundColor(Color.parseColor("#ff8a80"));
+          }
+        }.start();
+
+
         //pasa a la siguiente pregunta
       }
-      else//i eliges la respuesta incorrecta
+      else//si eliges la respuesta incorrecta
         {
           Toast.makeText(this, "Respuesta incorrecta", Toast.LENGTH_SHORT).show();
-          mostrarPregunta(++index);
+          incorrectAnswer++;
+
+          clickedButton.setBackgroundColor(Color.RED);
+
+          new CountDownTimer(2500, 50) {
+
+            @Override
+            public void onTick(long arg0) {
+              // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onFinish() {
+              mostrarPregunta(++index);
+              clickedButton.setBackgroundColor(Color.parseColor("#ff8a80"));
+            }
+          }.start();
 
           /*Intent intent = new Intent(this,Done.class);
           Bundle dataSend = new Bundle();
@@ -121,9 +159,11 @@ public class Playing extends AppCompatActivity implements View.OnClickListener{
 
   private void mostrarPregunta(int index) {
 
+
     if (index<totalQuestions)
     {
       thisQuestions++;
+
       txtQuestionNum.setText(String.format("%d / %d",thisQuestions,totalQuestions));
       progressBar.setProgress(0);
       progressValue=0;
@@ -137,7 +177,7 @@ public class Playing extends AppCompatActivity implements View.OnClickListener{
         question_text.setVisibility(View.INVISIBLE);
 
       }
-      else
+      else //si no se muestra la pregunta escrita
       {
          question_text.setText(Variables.questionsList.get(index).getQuestions());
         questions_image.setVisibility(View.INVISIBLE);
@@ -159,6 +199,7 @@ public class Playing extends AppCompatActivity implements View.OnClickListener{
       dataSend.putInt("SCORE",score);
       dataSend.putInt("TOTAL",totalQuestions);
       dataSend.putInt("CORRECTAS",correctAnswer);
+      dataSend.putInt("INCORRECTAS",incorrectAnswer);
       intent.putExtras(dataSend);
       startActivity(intent);
       finish();

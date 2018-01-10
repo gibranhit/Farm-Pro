@@ -1,6 +1,19 @@
 <resources>
-  <string name="app_name">preguntas</string>
+  <string name="app_name">Farm-Pro</string>
 
   <!-- TODO: Remove or change this placeholder text -->
   <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+
+
+  <string-array name="size_values">
+    <item>30</item>
+    <item>60</item>
+    <item>90</item>
+  </string-array>
+
+
+
+
 </resources>

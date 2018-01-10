@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.0"
     defaultConfig {
         applicationId "com.example.gibran.preguntas"
         minSdkVersion 21
@@ -26,15 +26,32 @@ dependencies {
     })
     compile 'com.firebaseui:firebase-ui-database:1.2.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.google.firebase:firebase-auth:10.2.0'
     compile 'com.google.firebase:firebase-core:10.2.0'
     compile 'com.google.firebase:firebase-database:10.2.0'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
-    compile 'com.android.support:cardview-v7:26.+'
-    compile 'com.android.support:design:26.+'
-    compile 'com.android.support:appcompat-v7:26.+'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.google.firebase:firebase-crash:9.6.1'
+    compile 'com.android.support:cardview-v7:26.0.1'
+    compile 'com.android.support:design:26.0.1'
+    compile 'com.android.support:appcompat-v7:26.0.1'
+  compile 'com.android.support:recyclerview-v7:26.0.1'
+  compile "com.android.support:support-core-utils:25.4.0"
+  compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:support-v4:25.3.1'
-    testCompile 'junit:junit:4.12'
     compile 'io.github.yavski:fab-speed-dial:1.0.6'
+  compile 'com.github.ganfra:material-spinner:2.0.0'
+    testCompile 'junit:junit:4.12'
 }
+
+configurations.all {
+  resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+    def requested = details.requested
+    if (requested.group == 'com.android.support') {
+      if (!requested.name.startsWith("multidex")) {
+        details.useVersion '26.0.0'
+      }
+    }
+  }
+}
+
 apply plugin: 'com.google.gms.google-services'
