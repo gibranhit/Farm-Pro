@@ -99,6 +99,7 @@ public class Playing extends AppCompatActivity implements View.OnClickListener{
         correctAnswer++;
         Toast.makeText(this, "Respuesta correcta", Toast.LENGTH_SHORT).show();
         clickedButton.setBackgroundColor(Color.parseColor("#32cb00"));
+        inhabilitarBoton();
 
         new CountDownTimer(2500, 50) {
 
@@ -113,6 +114,7 @@ public class Playing extends AppCompatActivity implements View.OnClickListener{
 
             mostrarPregunta(++index);
             clickedButton.setBackgroundColor(Color.parseColor("#ff8a80"));
+            habilitarBoton();
           }
         }.start();
 
@@ -123,8 +125,8 @@ public class Playing extends AppCompatActivity implements View.OnClickListener{
         {
           Toast.makeText(this, "Respuesta incorrecta", Toast.LENGTH_SHORT).show();
           incorrectAnswer++;
-
           clickedButton.setBackgroundColor(Color.RED);
+          inhabilitarBoton();
 
           new CountDownTimer(2500, 50) {
 
@@ -138,6 +140,7 @@ public class Playing extends AppCompatActivity implements View.OnClickListener{
             public void onFinish() {
               mostrarPregunta(++index);
               clickedButton.setBackgroundColor(Color.parseColor("#ff8a80"));
+              habilitarBoton();
             }
           }.start();
 
@@ -155,6 +158,20 @@ public class Playing extends AppCompatActivity implements View.OnClickListener{
 
     }
 
+  }
+
+  private void inhabilitarBoton() {
+    btnA.setEnabled(false);
+    btnB.setEnabled(false);
+    btnC.setEnabled(false);
+    btnD.setEnabled(false);
+  }
+
+  private void habilitarBoton() {
+    btnA.setEnabled(true);
+    btnB.setEnabled(true);
+    btnC.setEnabled(true);
+    btnD.setEnabled(true);
   }
 
   private void mostrarPregunta(int index) {

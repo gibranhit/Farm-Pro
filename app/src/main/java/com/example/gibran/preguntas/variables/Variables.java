@@ -15,4 +15,12 @@ public class Variables {
   public static String categoryId, categoryName;
   public static Usuario currentUser;
   public  static List<Questions> questionsList = new ArrayList<>();
+
+  public static final String STR_PUSH = "pushNotification";
+
+  public static final String USER_KEY = "Usuario";
+  public static final String PWD_KEY = "Contraseña";
+
+
+
 }

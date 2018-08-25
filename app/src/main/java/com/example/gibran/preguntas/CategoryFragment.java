@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.design.internal.NavigationMenu;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -37,6 +38,7 @@ import com.squareup.picasso.Picasso;
 import java.util.Collections;
 
 import io.github.yavski.fabspeeddial.FabSpeedDial;
+import io.paperdb.Paper;
 
 
 public class CategoryFragment extends Fragment {
@@ -135,6 +137,7 @@ public class CategoryFragment extends Fragment {
     if (auth.getCurrentUser() ==  null){
       startActivity( new Intent(getActivity(),MainActivity.class));
     }
+    Paper.book().destroy();
   }
 
 

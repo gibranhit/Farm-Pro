@@ -1,17 +1,24 @@
 package com.example.gibran.preguntas;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
+import com.example.gibran.preguntas.modelo.Conexion;
 import com.example.gibran.preguntas.modelo.Questions;
 import com.example.gibran.preguntas.variables.Variables;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,20 +27,24 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.StreamHandler;
 
+import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 import fr.ganfra.materialspinner.MaterialSpinner;
+import steelkiwi.com.library.DotsLoaderView;
 
 public class Start extends AppCompatActivity {
 
-  Button btnTodasPreguntas,btn30,btnSeis,btnNueve;
+  FirebaseAnalytics mFirebaseAnalytics;
   FirebaseDatabase database;
-  DatabaseReference questions;
-  MaterialSpinner spinner;
-  List<Integer> ListItems = new ArrayList<>();
-  ArrayAdapter<Integer> adapter;
-  //RadioButton r3, r6, r9;
-  int valor;
+  DatabaseReference questions,conexion;
+  int intentos = 1;
+  CircularProgressButton circularProgressButton, circularProgressButton1;
+
+  Conexion regreso = new Conexion();
 
 
   @Override
@@ -41,54 +52,107 @@ public class Start extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_start);
 
-
     database = FirebaseDatabase.getInstance();
     questions = database.getReference("Questions");
+    conexion = database.getReference("Conexion");
 
-    btn30 = (Button)findViewById(R.id.btn30);
+    mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
-    btn30.setOnClickListener(new View.OnClickListener() {
+    circularProgressButton = (CircularProgressButton)findViewById(R.id.btnCarga);
+
+    circularProgressButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        AsyncTask<String,String,String> carga = new AsyncTask<String, String, String>() {
+          @Override
+          protected String doInBackground(String... strings) {
+            try {
+              Thread.sleep(4000);
+            } catch (InterruptedException e) {
+              e.printStackTrace();
+            }return "carga lista";
+          }
+
+          @Override
+          protected void onPostExecute(String s) {
+            if (s.equals("carga lista")){
+              Toast.makeText(Start.this, "listo", Toast.LENGTH_SHORT).show();
+              circularProgressButton.doneLoadingAnimation(Color.parseColor("#333639"), BitmapFactory.decodeResource(getResources(),R.drawable.ic_done_white_48dp));
+            }
+          }
+        };
+        circularProgressButton.startAnimation();
+        carga.execute();
+        circularProgressButton.setEnabled(false);
+        circularProgressButton1.setEnabled(false);
         preguntasTres(Variables.categoryId);
+        intentos = intentos + intentos;
         timer();
-
+        intentoConexion();
+        analisa();
       }
     });
 
-    btnSeis = (Button) findViewById(R.id.btnseis);
+    circularProgressButton1 = (CircularProgressButton)findViewById(R.id.btnCarga6);
 
-    btnSeis.setOnClickListener(new View.OnClickListener() {
+    circularProgressButton1.setOnClickListener(new View.OnClickListener() {
       @Override
-      public void onClick(View v) {
+      public void onClick(View view) {
+        AsyncTask<String,String,String> carga = new AsyncTask<String, String, String>() {
+          @Override
+          protected String doInBackground(String... strings) {
+            try {
+              Thread.sleep(4000);
+            } catch (InterruptedException e) {
+              e.printStackTrace();
+            }return "done";
+          }
+
+          @Override
+          protected void onPostExecute(String s) {
+            if (s.equals("done")){
+              Toast.makeText(Start.this, "Listo", Toast.LENGTH_SHORT).show();
+              circularProgressButton1.doneLoadingAnimation(Color.parseColor("#333639"), BitmapFactory.decodeResource(getResources(),R.drawable.ic_done_white_48dp));
+            }
+          }
+        };
+        circularProgressButton1.startAnimation();
+        carga.execute();
+        circularProgressButton.setEnabled(false);
+        circularProgressButton1.setEnabled(false);
         preguntaSeis(Variables.categoryId);
+        intentos = intentos + intentos;
         timer();
-      }
-    });
-
-    btnNueve = (Button)findViewById(R.id.btnnueve);
-    btnNueve.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        preguntasNueve(Variables.categoryId);
-        timer();
-      }
-    });
-
-    btnTodasPreguntas = (Button) findViewById(R.id.btnTodasPreguntas);
-
-    btnTodasPreguntas.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        todasPreguntas(Variables.categoryId);
-        timer();
+        intentoConexion();
+        analizar();
       }
     });
 
   }
 
-  private void timer() {
-    new CountDownTimer(4000, 50) {
+  private void analizar() {
+    Bundle parametros = new Bundle();
+    parametros.putString("Nombre",Variables.currentUser.getNombre());
+    parametros.putString("Preguntas","60");
+    Log.d("intento",Variables.currentUser.getNombre());
+    mFirebaseAnalytics.logEvent("Intentos",parametros);
+  }
+  private void analisa() {
+    Bundle parametros = new Bundle();
+    parametros.putString("Nombre",Variables.currentUser.getNombre());
+    parametros.putString("Preguntas","30");
+    mFirebaseAnalytics.logEvent("Intentos",parametros);
+  }
+
+
+  private void intentoConexion() {
+
+    conexion.child(Variables.currentUser.getNombre()).setValue(new Conexion(intentos));
+  }
+
+
+  private void timer() { //este metodo cuenta un tiempo limite para despues ejecutarse
+    new CountDownTimer(5000, 50) {// se especifica el tiempo del contador
 
       @Override
       public void onTick(long arg0) {
@@ -97,7 +161,7 @@ public class Start extends AppCompatActivity {
       }
 
       @Override
-      public void onFinish() {
+      public void onFinish() { // despues de 4 segundos  se ejecuta el siguiente codigo, donde cambia de una actividad a otra
         Intent intent = new Intent(Start.this, Playing.class);
         startActivity(intent);
         finish();
@@ -108,33 +172,6 @@ public class Start extends AppCompatActivity {
 
 
   private void preguntaSeis(String categoryId) {
-
-  /*  r3 = (RadioButton) findViewById(R.id.tres);
-    r6 = (RadioButton) findViewById(R.id.seis);
-    r9 = (RadioButton) findViewById(R.id.nueve);
-    valor();*/
-
-  /*  spinner=(MaterialSpinner) findViewById(R.id.size_spinner);
-    adapter = new ArrayAdapter<Integer>(this,android.R.layout.simple_spinner_dropdown_item,ListItems);
-    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-    spinner.setAdapter(adapter);
-
-
-    valorPreguntas();
-
-    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-      @Override
-      public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
-
-        valor = Integer.parseInt(spinner.getItemAtPosition(posicion).toString());
-      }
-
-      @Override
-      public void onNothingSelected(AdapterView<?> adapterView) {
-
-      }
-    });*/
-
 
     //primero, limpia la lista si hay una vieja pregunta
     if (Variables.questionsList.size() > 0)
@@ -158,35 +195,6 @@ public class Start extends AppCompatActivity {
       });
 
   }
-
-/*  private int valor() {
-
-    if (r3.isChecked()) {
-
-
-      valor = 30;
-
-
-    }
-
-    if (r6.isChecked()) {
-
-
-      valor = 60;
-
-
-    }
-    if (r9.isChecked()) {
-
-      valor = 90;
-
-
-    }
-    return valor;
-
-
-  }*/
-
 
   private void todasPreguntas(String categoryId) {
 
@@ -223,33 +231,6 @@ public class Start extends AppCompatActivity {
       Variables.questionsList.clear();
 
     questions.orderByChild("CategoryId").equalTo(categoryId).limitToFirst(30)
-      .addValueEventListener(new ValueEventListener() {
-        @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
-          for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-            Questions ques = postSnapshot.getValue(Questions.class);
-            Variables.questionsList.add(ques);
-            Collections.shuffle(Variables.questionsList);
-          }
-        }
-
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-
-        }
-      });
-
-
-  }
-
-  private void preguntasNueve(String categoryId) {
-
-
-    //primero, limpia la lista si hay una vieja pregunta
-    if (Variables.questionsList.size() > 0)
-      Variables.questionsList.clear();
-
-    questions.orderByChild("CategoryId").equalTo(categoryId).limitToFirst(90)
       .addValueEventListener(new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {

@@ -19,7 +19,7 @@
       android:id="@+id/txt_nombre"
       android:text="Categoria"
       android:layout_marginLeft="10dp"
-      android:textSize="24sp"
+      android:textSize="15sp"
       android:layout_weight="7"
       android:textColor="@color/colorPrimary"
       android:layout_width="0dp"
@@ -28,7 +28,7 @@
     <TextView
       android:id="@+id/txt_puntaje"
       android:text="Puntaje"
-      android:textSize="24sp"
+      android:textSize="15sp"
       android:layout_weight="3"
       android:textColor="@color/colorPrimary"
       android:layout_width="0dp"

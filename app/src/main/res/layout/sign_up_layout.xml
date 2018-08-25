@@ -13,17 +13,44 @@
     android:orientation="vertical">
 
     <com.rengwuxian.materialedittext.MaterialEditText
-      android:id="@+id/Usuario"
+      android:id="@+id/Nombre"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:hint="Nombre"
       android:textColor="@color/colorPrimary"
       android:textColorHint="@color/colorPrimary"
-      android:textSize="24sp"
+      android:textSize="15sp"
       app:met_baseColor="@color/colorPrimary"
       app:met_floatingLabel="highlight"
       app:met_primaryColor="@color/colorPrimary"
       app:met_singleLineEllipsis="true" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+      android:id="@+id/Apellidos"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="Apellidos"
+      android:textColor="@color/colorPrimary"
+      android:textColorHint="@color/colorPrimary"
+      android:textSize="15sp"
+      app:met_baseColor="@color/colorPrimary"
+      app:met_floatingLabel="highlight"
+      app:met_primaryColor="@color/colorPrimary"
+      app:met_singleLineEllipsis="true" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+      android:id="@+id/Usuario"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="Usuario/Apodo/Nickname"
+      android:textColor="@color/colorPrimary"
+      android:textColorHint="@color/colorPrimary"
+      android:textSize="15sp"
+      app:met_baseColor="@color/colorPrimary"
+      app:met_floatingLabel="highlight"
+      app:met_primaryColor="@color/colorPrimary"
+      app:met_singleLineEllipsis="true" />
+
     <com.rengwuxian.materialedittext.MaterialEditText
       android:id="@+id/Matricula"
       android:layout_width="match_parent"
@@ -31,25 +58,13 @@
       android:hint="Matricula"
       android:textColor="@color/colorPrimary"
       android:textColorHint="@color/colorPrimary"
-      android:textSize="24sp"
+      android:textSize="15sp"
       app:met_baseColor="@color/colorPrimary"
       app:met_floatingLabel="highlight"
       app:met_primaryColor="@color/colorPrimary"
       app:met_singleLineEllipsis="true" />
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-      android:id="@+id/Password"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:hint="Contraseña"
-      android:inputType="textPassword"
-      android:textColor="@color/colorPrimary"
-      android:textColorHint="@color/colorPrimary"
-      android:textSize="24sp"
-      app:met_baseColor="@color/colorPrimary"
-      app:met_floatingLabel="highlight"
-      app:met_primaryColor="@color/colorPrimary"
-      app:met_singleLineEllipsis="true" />
+
 
     <com.rengwuxian.materialedittext.MaterialEditText
       android:id="@+id/Email"
@@ -59,11 +74,27 @@
       android:inputType="textEmailAddress"
       android:textColor="@color/colorPrimary"
       android:textColorHint="@color/colorPrimary"
-      android:textSize="24sp"
+      android:textSize="15sp"
       app:met_baseColor="@color/colorPrimary"
       app:met_floatingLabel="highlight"
       app:met_primaryColor="@color/colorPrimary"
       app:met_singleLineEllipsis="true" />
+    <com.rengwuxian.materialedittext.MaterialEditText
+      android:id="@+id/Password"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="Contraseña"
+      android:inputType="textPassword"
+      android:textColor="@color/colorPrimary"
+      android:textColorHint="@color/colorPrimary"
+      android:textSize="15sp"
+      app:met_baseColor="@color/colorPrimary"
+      app:met_floatingLabel="highlight"
+      app:met_maxCharacters="15"
+      app:met_minCharacters="6"
+      app:met_primaryColor="@color/colorPrimary"
+      app:met_singleLineEllipsis="true" />
+
 
   </LinearLayout>
 

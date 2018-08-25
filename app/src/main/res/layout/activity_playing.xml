@@ -105,7 +105,8 @@
      android:foreground="?android:attr/selectableItemBackground"
      style="@style/Base.Widget.AppCompat.Button.Borderless"
      android:layout_width="match_parent"
-     android:layout_height="wrap_content" />
+     android:layout_height="wrap_content"
+     android:enabled="true"/>
    <Button
      android:id="@+id/btnAnswerB"
      android:text="Respuesta B"
@@ -117,7 +118,8 @@
      android:foreground="?android:attr/selectableItemBackground"
      style="@style/Base.Widget.AppCompat.Button.Borderless"
      android:layout_width="match_parent"
-     android:layout_height="wrap_content" />
+     android:layout_height="wrap_content"
+     android:enabled="true"/>
    <Button
      android:id="@+id/btnAnswerC"
      android:text="Respuesta C "
@@ -129,7 +131,8 @@
      android:foreground="?android:attr/selectableItemBackground"
      style="@style/Base.Widget.AppCompat.Button.Borderless"
      android:layout_width="match_parent"
-     android:layout_height="wrap_content" />
+     android:layout_height="wrap_content"
+     android:enabled="true"/>
    <Button
      android:id="@+id/btnAnswerD"
      android:text="Respuesta D"
@@ -141,7 +144,8 @@
      android:foreground="?android:attr/selectableItemBackground"
      style="@style/Base.Widget.AppCompat.Button.Borderless"
      android:layout_width="match_parent"
-     android:layout_height="wrap_content" />
+     android:layout_height="wrap_content"
+     android:enabled="true"/>
 
 
 
